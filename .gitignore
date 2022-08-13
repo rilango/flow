@@ -1,0 +1,12 @@
+.ipython
+.jupyter
+.cupy
+.nv
+.cudf/
+.vscode/
+.env
+.ipynb_checkpoints/
+.pytest_cache/
+
+__pycache__
+*.pyc

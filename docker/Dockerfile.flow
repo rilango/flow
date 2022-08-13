@@ -1,0 +1,20 @@
+ARG BASE_IMAGE=rapidsai/rapidsai-clx-dev:22.06-cuda11.5-devel-ubuntu20.04-py3.9
+FROM ${BASE_IMAGE}
+
+RUN apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y vim wget libxrender1 libxext6\
+    && rm -rf /var/lib/apt/lists/*
+
+SHELL ["/bin/bash", "-c"]
+
+RUN conda create -n flow -c schrodinger -c bioconda -c rdkit\
+    mgltools pymol autodock-vina -y
+
+COPY docker/requirements.txt /tmp/requirements.txt
+RUN /opt/conda/envs/mgltools/bin/python -m pip install -r /tmp/requirements.txt && \
+    rm /tmp/requirements.txt
+
+ENV PATH /opt/conda/bin:$PATH
+RUN echo "source activate flow" > /etc/bash.bashrc
+
+# ENTRYPOINT [ "" ]
+ENV PATH /opt/conda/envs/flow/bin:$PATH

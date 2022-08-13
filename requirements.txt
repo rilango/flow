@@ -1,0 +1,10 @@
+protobuf
+grpcio
+rdkit-pypi
+mols2grid
+pytorch-lightning
+numpy
+pandas
+vina
+pyyaml
+biopython
